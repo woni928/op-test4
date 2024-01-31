@@ -119,8 +119,10 @@ jobs:
         [ -e files ] && mv files openwrt/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         chmod +x $DIY_P2_SH
+        chmod +x $GITHUB_WORKSPACE/scripts/*.sh
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
+        $GITHUB_WORKSPACE/scripts/preset-clash-core.sh $CLASH_KERNEL
 
     - name: 下载软件包
       id: package
@@ -171,7 +173,7 @@ jobs:
       uses: unifreq/openwrt_packit@master
       env:
         WHOAMI: ham
-        OPENWRT_VER: R23.7.7
+       # OPENWRT_VER: R23.7.7
         OPENWRT_ARMVIRT: openwrt-armvirt/*.tar.gz
         PACKAGE_SOC: s905d
         KERNEL_AUTO_LATEST: true
@@ -200,7 +202,7 @@ jobs:
               
               更新说明：
               2023-0924：增加adguarhome插件，测试passwall+SSR默认插件全选。 
-              2024-0131：修复perl-html-parser编译报错，同步上游的更新。
+              2024-0201：修复perl-html-parser编译报错，下载clash内核，同步上游的更新。
           
     - name: 清理Actions空间
       uses: Mattraks/delete-workflow-runs@main
