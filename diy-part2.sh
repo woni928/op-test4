@@ -27,4 +27,4 @@ sed -i 's/192.168.1.1/192.168.123.2/g' package/base-files/files/bin/config_gener
 #sed -i 's#flto#flto -D_LARGEFILE64_SOURCE#g' feeds/packages/utils/acpid/Makefile
 sed -i 's#SYNC#SYNC -D_LARGEFILE64_SOURCE#g' feeds/packages/utils/xfsprogs/Makefile
 #sed -i 's/stripped/release/g' feeds/packages/multimedia/aliyundrive-webdav/Makefile
-cp -f $GITHUB_WORKSPACE/N1/perlmod.mk feeds/packages/lang/perl/perlmod.mk
+cp -f $GITHUB_WORKSPACE/scripts/perlmod.mk feeds/packages/lang/perl/perlmod.mk
