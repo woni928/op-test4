@@ -41,10 +41,9 @@ sed -i 's/REENTRANT -D_GNU_SOURCE/LARGEFILE64_SOURCE/g' feeds/packages/lang/perl
 #rm -rf feeds/luci/applications/luci-app-mosdns
 #git clone https://github.com/sbwml/luci-app-mosdns package/luci-app-mosdns
 
-# 需要 golang 1.20.x 或最新版本（需要 openwrt-21.02 或更旧版本）
-#rm -rf feeds/packages/lang/golang
-#git clone https://github.com/sbwml/packages_lang_golang -b 22.x feeds/packages/lang/golang
-
+# 删除重复的插件。
+./scripts/feeds clean
+./scripts/feeds update -a
 rm -rf feeds/smpackage/{base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,vsftpd-alt,miniupnpd-iptables,wireless-regdb}
 rm -rf feeds/luci/applications/luci-app-mosdns
 rm -rf feeds/luci/applications/luci-app-smartdns
@@ -53,7 +52,4 @@ rm -rf feeds/smpackage/luci-app-adguardhome
 rm -rf feeds/smpackage/luci-app-bypass
 rm -rf feeds/packages/lang/golang
 git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
-
-#script/feeds clean
-#scripts/feeds update -a
-#scripts/feeds install -a
+./scripts/feeds install -a
