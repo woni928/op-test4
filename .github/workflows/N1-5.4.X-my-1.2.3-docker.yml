@@ -203,6 +203,7 @@ jobs:
               2024-0205：修复perl-html-parser编译报错的问题，同步上游的更新。
               2024-0224：插件更新到最新。
               2024-0303：增加docker。
+              2024-0311：同步上游的更新
 
     - name: 清理Actions空间
       uses: Mattraks/delete-workflow-runs@main
@@ -210,6 +211,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}
           keep_minimum_runs: 0
-          retain_days: 7
+          retain_days: 14
           #retain_days: ${{ github.event.inputs.action_days }}
           
