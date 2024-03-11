@@ -122,7 +122,6 @@ jobs:
         chmod +x $GITHUB_WORKSPACE/scripts/*.sh
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
-        $GITHUB_WORKSPACE/scripts/preset-clash-core.sh $CLASH_KERNEL
 
     - name: 下载软件包
       id: package
