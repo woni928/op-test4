@@ -43,9 +43,9 @@ sed -i 's/REENTRANT -D_GNU_SOURCE/LARGEFILE64_SOURCE/g' feeds/packages/lang/perl
 #git clone https://github.com/sbwml/luci-app-mosdns package/luci-app-mosdns
 
 # 删除重复的插件。
-./scripts/feeds clean
-sed -i '1i src-git smpackage https://github.com/kenzok8/small-package' feeds.conf.default
-./scripts/feeds update -a
+#./scripts/feeds clean
+#sed -i '1i src-git smpackage https://github.com/kenzok8/small-package' feeds.conf.default
+#./scripts/feeds update -a
 #rm -rf feeds/smpackage/{base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,vsftpd-alt,miniupnpd-iptables,wireless-regdb}
 #rm -rf feeds/luci/applications/luci-app-mosdns
 #rm -rf feeds/luci/applications/luci-app-smartdns
@@ -54,4 +54,10 @@ sed -i '1i src-git smpackage https://github.com/kenzok8/small-package' feeds.con
 #rm -rf feeds/smpackage/luci-app-bypass
 rm -rf feeds/packages/lang/golang
 git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
-./scripts/feeds install -a
+#./scripts/feeds install -a
+
+find ./ | grep Makefile | grep v2ray-geodata | xargs rm -f
+find ./ | grep Makefile | grep mosdns | xargs rm -f
+
+git clone https://github.com/sbwml/luci-app-mosdns -b v5 package/mosdns
+git clone https://github.com/sbwml/v2ray-geodata package/v2ray-geodata
