@@ -202,7 +202,7 @@ jobs:
               2023-0924：增加adguarhome插件，测试passwall+SSR默认插件全选。 
               2024-0201：修复perl-html-parser编译报错，同步上游的更新。
               2024-0229：同步上游的更新。
-              2024-0313：插件更新到最新。
+              2024-0315：插件更新到最新。
           
     - name: 清理Actions空间
       uses: Mattraks/delete-workflow-runs@main
