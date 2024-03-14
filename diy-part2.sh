@@ -23,42 +23,32 @@ sed -i 's/192.168.1.1/192.168.123.2/g' package/base-files/files/bin/config_gener
 # 2023-08-29 aliyundrive-webdav 编译报错回滚到2.2.1
 #curl -o ./feeds/packages/multimedia/aliyundrive-webdav/Makefile https://raw.githubusercontent.com/Jason6111/OpenWrt_Personal/main/other/aliyun/Makefile
 
-# 临时修复acpid,xfsprogs,aliyundrive-webdav,perl-html-parser,toplevel.mk
+# 临时修复acpid,xfsprogs,aliyundrive-webdav,perl-html-parser,v2dat
 #sed -i 's#flto#flto -D_LARGEFILE64_SOURCE#g' feeds/packages/utils/acpid/Makefile
 #sed -i 's#SYNC#SYNC -D_LARGEFILE64_SOURCE#g' feeds/packages/utils/xfsprogs/Makefile
 #sed -i 's/stripped/release/g' feeds/packages/multimedia/aliyundrive-webdav/Makefile
 #cp -f $GITHUB_WORKSPACE/scripts/perlmod.mk feeds/packages/lang/perl/perlmod.mk
 sed -i 's/REENTRANT -D_GNU_SOURCE/LARGEFILE64_SOURCE/g' feeds/packages/lang/perl/perlmod.mk
 sed -i 's#GO_PKG_TARGET_VARS.*# #g' feeds/packages/utils/v2dat/Makefile
-#sed -i 's/PKG_USE_MIPS16/PKG_BUILD_FLAGS:=no-mips16\nPKG_USE_MIPS16/' feeds/helloworld/v2ray-plugin/Makefile
 
 # 解决 luci-app-passwall 1+2 状态页延时检测为 0.00 ms 的问题
 #./scripts/feeds install -a
 #rm -rf feeds/packages/net/curl
 #git clone https://github.com/sbwml/feeds_packages_net_curl feeds/packages/net/curl
 
-# MosDNS
-#rm -rf feeds/packages/net/mosdns
-#rm -rf feeds/packages/mosdns
-#rm -rf feeds/luci/applications/luci-app-mosdns
-#git clone https://github.com/sbwml/luci-app-mosdns package/luci-app-mosdns
-
-# 删除重复的插件。
-#./scripts/feeds clean
-#sed -i '1i src-git smpackage https://github.com/kenzok8/small-package' feeds.conf.default
-#./scripts/feeds update -a
-#rm -rf feeds/smpackage/{base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,vsftpd-alt,miniupnpd-iptables,wireless-regdb}
-rm -rf feeds/luci/applications/luci-app-mosdns
-rm -rf feeds/luci/applications/luci-app-smartdns
-rm -rf feeds/packages/net/{alist,adguardhome,mosdns,smartdns}
-rm -rf feeds/smpackage/luci-app-adguardhome
-rm -rf feeds/smpackage/luci-app-bypass
+# requires golang 1.20.x or latest version (openwrt-21.02 & older version needs)
 rm -rf feeds/packages/lang/golang
-git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
-#./scripts/feeds install -a
+git clone https://github.com/sbwml/packages_lang_golang -b 20.x feeds/packages/lang/golang
 
-find ./ | grep Makefile | grep v2ray-geodata | xargs rm -f
-find ./ | grep Makefile | grep mosdns | xargs rm -f
+# remove v2ray-geodata package from feeds (openwrt-22.03 & master)
+rm -rf feeds/packages/net/v2ray-geodata
+rm -rf feeds/luci/applications/luci-app-mosdns
+rm -rf feeds/packages/net/mosdns
+
+git clone https://github.com/sbwml/luci-app-mosdns -b v5 package/mosdns
+git clone https://github.com/sbwml/v2ray-geodata package/v2ray-geodata
+
+
 
 git clone https://github.com/sbwml/luci-app-mosdns -b v5 package/mosdns
 git clone https://github.com/sbwml/v2ray-geodata package/v2ray-geodata
