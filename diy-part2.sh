@@ -36,15 +36,12 @@ sed -i 's#GO_PKG_TARGET_VARS.*# #g' feeds/packages/utils/v2dat/Makefile
 #rm -rf feeds/packages/net/curl
 #git clone https://github.com/sbwml/feeds_packages_net_curl feeds/packages/net/curl
 
-# requires golang 1.20.x or latest version (openwrt-21.02 & older version needs)
+# 一键命令(防止插件冲突，删除重复)
+sed -i '1i src-git kenzo https://github.com/kenzok8/openwrt-packages' feeds.conf.default
+sed -i '2i src-git small https://github.com/kenzok8/small' feeds.conf.default
+./scripts/feeds update -a && rm -rf feeds/luci/applications/luci-app-mosdns
+rm -rf feeds/packages/net/{alist,adguardhome,xray*,v2ray*,v2ray*,sing*,smartdns}
 rm -rf feeds/packages/lang/golang
-git clone https://github.com/sbwml/packages_lang_golang -b 20.x feeds/packages/lang/golang
-
-# remove v2ray-geodata package from feeds (openwrt-22.03 & master)
-rm -rf feeds/packages/net/v2ray-geodata
-rm -rf feeds/luci/applications/luci-app-mosdns
-rm -rf feeds/packages/net/mosdns
-
-git clone https://github.com/sbwml/luci-app-mosdns -b v5 package/mosdns
-git clone https://github.com/sbwml/v2ray-geodata package/v2ray-geodata
-
+git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
+./scripts/feeds install -a 
+make menuconfig
