@@ -35,10 +35,3 @@
 #wget -qO- $CLASH_META_URL | tar xOvz > files/etc/openclash/core/clash_meta
 #wget -qO- $GEOIP_URL > files/etc/openclash/GeoIP.dat
 #wget -qO- $GEOSITE_URL > files/etc/openclash/GeoSite.dat
-
-# 一键命令(防止插件冲突，删除重复)
-rm -rf feeds/luci/applications/luci-app-mosdns
-rm -rf feeds/packages/net/{alist,adguardhome,xray*,v2ray*,v2ray*,sing*,smartdns}
-rm -rf feeds/packages/lang/golang
-git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
-
